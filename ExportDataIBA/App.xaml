@@ -2,8 +2,30 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ExportDataIBA"
-             StartupUri="MainWindow.xaml">
+             xmlns:vm="clr-namespace:ExportData.UI.ViewModels"
+             xmlns:view="clr-namespace:ExportData.UI.Views"
+             StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type vm:LoadFileViewModel}">
+                <view:LoadFileView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DataBaseViewModel}">
+                <view:DataBaseView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ExportViewModel}">
+                <view:ExportView/>
+            </DataTemplate>
+
+            <vm:ViewModelLocator x:Key="Locator"/>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

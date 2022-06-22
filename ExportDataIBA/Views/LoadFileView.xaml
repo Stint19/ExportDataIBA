@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="ExportData.UI.Views.LoadFileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ExportData.UI.Views"
+             xmlns:res="clr-namespace:ExportData.UI.Properties"
+             DataContext="{Binding LoadFileModel, Source={StaticResource Locator}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#272537">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       FontWeight="Bold"
+                       FontSize="30"
+                       DockPanel.Dock="Left"
+                       Text="{x:Static res:Resource.BrowsingСontentLabel}"/>
+            <Button Width="150"
+                    Margin="10"
+                    DockPanel.Dock="Right"
+                    Content="{x:Static res:Resource.LoadFileMenu}"
+                    Command="{Binding OpenCommand}"
+                    IsEnabled="{Binding IsEnableButtons}"></Button>
+        </DockPanel>
+
+        <DataGrid AutoGenerateColumns="False"
+            x:Name="FileGrid" Grid.Row="1"  IsReadOnly="True" ItemsSource="{Binding Persons}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static res:Resource.Date}" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="{x:Static res:Resource.FirstName}" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="{x:Static res:Resource.LastName}" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="{x:Static res:Resource.SurName}" Binding="{Binding SurName}"/>
+                <DataGridTextColumn Header="{x:Static res:Resource.City}" Binding="{Binding City}"/>
+                <DataGridTextColumn Header="{x:Static res:Resource.Country}" Binding="{Binding Country}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Width="150" Margin="10" Command="{Binding ImportToDBCommand}" Content="{Binding ButtonImportText}" IsEnabled="{Binding IsEnableButtons}"/>
+            <ProgressBar Height="30" Width="140" IsIndeterminate="{Binding IsEnableProgress}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
